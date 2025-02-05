@@ -12,6 +12,10 @@ with open("models/scaler.pkl", "rb") as f:
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"message": "FastAPI SERVER STARTED SUCCESSFULLY!"}
+
 class EarthquakeInput(BaseModel):
     depth: float
     latitude: float
