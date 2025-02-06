@@ -52,22 +52,23 @@ Clone the repository:
 ```bash
 git clone https://github.com/yourusername/earthquake-prediction.git
 cd earthquake-prediction
-
+```
 ## Create and activate the virtual environment:
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
+```
 ## Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 ## 2. Running the Streamlit App:
-
-Start the Streamlit app:
 ```bash
-streamlit run app/app.py
+Start the Streamlit app:
 ```
+streamlit run app/app.py
+
 The app will open in your browser where you can interact with the model.
 
 ## 3. Running the FastAPI Server:
