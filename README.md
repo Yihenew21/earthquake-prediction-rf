@@ -92,12 +92,4 @@ The FastAPI server will be available at http://localhost:8000.
 Feel free to fork this repository, open issues, or create pull requests to improve this project.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-### **📌 Final Notes**
-1. **Customization**: You can customize the README and documentation further by adding examples, data explanations, and potential improvements.
-2. **Visuals**: Add screenshots of the Streamlit app or other visuals to make the README more engaging.
-
-Let me know if you'd like me to help with any additional details! 😊
+This project is licensed under the MIT License - see the LICENSE file for details.
