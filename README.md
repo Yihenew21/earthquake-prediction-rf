@@ -55,46 +55,43 @@ cd earthquake-prediction
 
 ## Create and activate the virtual environment:
 
-
+```bash
 python -m venv venv
 venv\Scripts\activate
-Install dependencies:
-
+## Install dependencies:
+```bash
 pip install -r requirements.txt
-
+```
 ## 2. Running the Streamlit App:
 
 Start the Streamlit app:
-
-
+```bash
 streamlit run app/app.py
+```
 The app will open in your browser where you can interact with the model.
 
 ## 3. Running the FastAPI Server:
 Run the FastAPI server:
-
-
+```bash
 uvicorn deployment.api:app --reload
 The FastAPI server will be available at http://localhost:8000.
-
+```
 ## Dependencies
--Python 3.x
--pandas
--scikit-learn
--numpy
--matplotlib
--seaborn
--fastapi
--streamlit
--uvicorn
+-`Python 3.x`
+-`pandas`
+-`scikit-learn`
+-`numpy`
+-`matplotlib`
+-`seaborn`
+-`fastapi`
+-`streamlit`
+-`uvicorn`
 
 ## Contributing
 Feel free to fork this repository, open issues, or create pull requests to improve this project.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-
 
 ---
 
