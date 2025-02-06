@@ -1,56 +1,105 @@
 # Earthquake Magnitude Prediction using Random Forest
 
+## Project Overview
+This project aims to predict the **magnitude of earthquakes** using historical earthquake data. The prediction model is built using a **Random Forest Regressor** and is deployed through a **FastAPI** server for programmatic access. A user-friendly **Streamlit** app is also created for direct interaction with the model.
+
 ## Table of Contents
 1. [Project Overview](#project-overview)
 2. [Data Source & Description](#data-source--description)
 3. [Problem Definition](#problem-definition)
 4. [Data Preprocessing](#data-preprocessing)
 5. [Model Training](#model-training)
-6. [Evaluation](#evaluation)
+6. [Evaluation Metrics](#evaluation-metrics)
 7. [Model Deployment](#model-deployment)
 8. [Running the Project](#running-the-project)
 9. [Dependencies](#dependencies)
 10. [Contributing](#contributing)
 11. [License](#license)
 
-## Project Overview
-This project aims to predict the **magnitude of earthquakes** based on several seismic features such as **depth, latitude, longitude**, and **number of stations** reporting the earthquake. A **Random Forest** regressor model is used to train and predict the earthquake magnitude. The project includes a **Streamlit** UI for user interaction and a **FastAPI** deployment for model serving.
-
 ## Data Source & Description
-- **Dataset Source**: [Kaggle Earthquake Data](https://www.kaggle.com/datasets/)
-- **Features**:
-  - **`depth`**: Depth of the earthquake (in km).
-  - **`latitude`**: Latitude of the earthquake.
-  - **`longitude`**: Longitude of the earthquake.
-  - **`nst`**: Number of stations reporting the earthquake.
-  - **`mag`**: Earthquake magnitude (target variable).
+The dataset for this project comes from publicly available earthquake data, such as data from the **United States Geological Survey (USGS)** or **Kaggle**.
+- **File Format**: CSV
+- **Key Features**:
+  - `depth` (float): Depth of the earthquake in kilometers.
+  - `latitude` (float): Latitude of the earthquake.
+  - `longitude` (float): Longitude of the earthquake.
+  - `nst` (int): Number of reporting stations.
+  - `mag` (float): Earthquake magnitude (target variable).
 
 ## Problem Definition
-The goal is to predict the magnitude of earthquakes based on seismic data. We chose **Random Forest Regressor** as the model to solve this regression problem.
+We aim to predict the magnitude of an earthquake based on seismic features like depth, latitude, longitude, and the number of stations reporting the earthquake. This is a regression problem, and we use the **Random Forest Regressor** model to solve it.
 
 ## Data Preprocessing
-- Missing values are handled appropriately.
-- Numerical features are scaled using **StandardScaler**.
-- Categorical features are encoded (if any).
-- The data is split into **80% training** and **20% testing** sets.
+1. **Handling Missing Values**: Imputing or removing missing data.
+2. **Feature Scaling**: Standardizing numerical features using **StandardScaler**.
+3. **Outlier Detection**: Identifying and handling outliers to improve model performance.
 
 ## Model Training
-- A **Random Forest Regressor** is trained on the preprocessed dataset.
-- **Mean Squared Error (MSE)** and **R² Score** are used for model evaluation.
+The model used is the **Random Forest Regressor**, which is trained on historical earthquake data to predict earthquake magnitudes. **Hyperparameter tuning** is performed to improve performance.
 
-## Evaluation
-The trained model is evaluated using:
-- **MSE**: Measures prediction accuracy.
-- **R² Score**: Indicates the proportion of variance explained by the model.
+## Evaluation Metrics
+The model is evaluated using:
+- **Mean Squared Error (MSE)**: Measures the prediction accuracy.
+- **R² Score**: Indicates how well the model explains the variance in the data.
 
 ## Model Deployment
-The trained model is deployed as an API using **FastAPI** and can be accessed programmatically. A **Streamlit** app is also created to allow users to input earthquake parameters and get real-time magnitude predictions.
+The trained model is deployed using **FastAPI**, and predictions can be made programmatically. A **Streamlit** app is provided to allow users to input earthquake parameters and receive magnitude predictions.
 
 ## Running the Project
-To run this project, follow the steps below:
 
-### Setup the Environment:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/earthquake-prediction.git
-   cd earthquake-prediction
+### 1. Setup the Environment:
+Clone the repository:
+```bash
+git clone https://github.com/yourusername/earthquake-prediction.git
+cd earthquake-prediction
+
+## Create and activate the virtual environment:
+
+
+python -m venv venv
+venv\Scripts\activate
+Install dependencies:
+
+pip install -r requirements.txt
+
+## 2. Running the Streamlit App:
+
+Start the Streamlit app:
+
+
+streamlit run app/app.py
+The app will open in your browser where you can interact with the model.
+
+## 3. Running the FastAPI Server:
+Run the FastAPI server:
+
+
+uvicorn deployment.api:app --reload
+The FastAPI server will be available at http://localhost:8000.
+
+## Dependencies
+-Python 3.x
+-pandas
+-scikit-learn
+-numpy
+-matplotlib
+-seaborn
+-fastapi
+-streamlit
+-uvicorn
+
+## Contributing
+Feel free to fork this repository, open issues, or create pull requests to improve this project.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+
+---
+
+### **📌 Final Notes**
+1. **Customization**: You can customize the README and documentation further by adding examples, data explanations, and potential improvements.
+2. **Visuals**: Add screenshots of the Streamlit app or other visuals to make the README more engaging.
+
+Let me know if you'd like me to help with any additional details! 😊
