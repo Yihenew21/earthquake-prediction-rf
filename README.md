@@ -64,19 +64,20 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 ## 2. Running the Streamlit App:
-```bash
-Start the Streamlit app:
-```
-streamlit run app/app.py
 
+Start the Streamlit app:
+```bash
+streamlit run app/app.py
+```
 The app will open in your browser where you can interact with the model.
 
 ## 3. Running the FastAPI Server:
 Run the FastAPI server:
 ```bash
 uvicorn deployment.api:app --reload
-The FastAPI server will be available at http://localhost:8000.
 ```
+The FastAPI server will be available at http://localhost:8000.
+
 ## Dependencies
 -`Python 3.x`
 -`pandas`
@@ -87,9 +88,12 @@ The FastAPI server will be available at http://localhost:8000.
 -`fastapi`
 -`streamlit`
 -`uvicorn`
-
+## Future Improvements and Enhancements
+- Real-time Data: Incorporating live seismic data for real-time predictions.
+- Advanced Models: Exploring Deep Learning models or XGBoost for better performance.
+- Geospatial Analysis: Implementing models that consider the proximity to fault lines and geographical features.
 ## Contributing
 Feel free to fork this repository, open issues, or create pull requests to improve this project.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
