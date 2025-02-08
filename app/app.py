@@ -65,10 +65,10 @@ st.write("Enter the earthquake parameters below to predict the magnitude.")
 
 # Sidebar for Inputs
 st.sidebar.header("🔧 Input Parameters")
-depth = st.sidebar.number_input("🌎 Depth (km)", min_value=0.0, max_value=700.0, value=10.0, step=0.1)
-latitude = st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=90.0, value=st.session_state.latitude, step=0.01)
-longitude = st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=st.session_state.longitude, step=0.01)
-nst = st.sidebar.slider("📡 Number of Stations (nst)", min_value=0, max_value=100, value=10, step=1)
+depth = st.sidebar.number_input("🌎 Depth (km)", min_value=0.0, max_value=700.0, value=10.0, step=0.1, key="depth_input")
+latitude = st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=90.0, value=st.session_state.latitude, step=0.01, key="latitude_input")
+longitude = st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=st.session_state.longitude, step=0.01, key="longitude_input")
+nst = st.sidebar.slider("📡 Number of Stations (nst)", min_value=0, max_value=100, value=10, step=1, key="nst_input")
 
 # Back Button
 if st.sidebar.button("🔙 Go Back to Prediction"):
@@ -115,8 +115,8 @@ if st.button("Click Map to Set Location"):
     longitude = st.session_state.longitude
 
     # Update the input fields with the new location
-    st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=90.0, value=latitude, step=0.01)
-    st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=longitude, step=0.01)
+    st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=90.0, value=latitude, step=0.01, key="latitude_input")
+    st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=longitude, step=0.01, key="longitude_input")
 
 # Process Input and Prediction
 if st.sidebar.button("🚀 Predict Magnitude"):
@@ -157,5 +157,5 @@ if st.sidebar.button("Show Feature Importance"):
 # Footer
 st.markdown("""
     <hr>
-    <center>🌍 Developed by YIHENEW ANIMUT ❤️ for Earthquake Prediction | github Username : @Yihenew21</center>
+    <center>🌍 Developed by YIHENEW ANIMUT ❤️ for Earthquake MAGNITUDE Prediction | github Username : @Yihenew21</center>
 """, unsafe_allow_html=True)
