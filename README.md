@@ -1,6 +1,6 @@
 # 🌍 Earthquake Magnitude Prediction using Random Forest
 #demo Site here : https://earthquake-prediction-rf-1.onrender.com/
-       API Link : https://earthquake-prediction-rf.onrender.com
+#API Link : https://earthquake-prediction-rf.onrender.com
 ## Project Overview
 This project aims to predict the **magnitude of earthquakes** using historical earthquake data. The prediction model is built using a **Random Forest Regressor** and is deployed through a **FastAPI** server for programmatic access. A user-friendly **Streamlit** app is also created for direct interaction with the model.
 
