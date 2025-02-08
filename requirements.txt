@@ -4,4 +4,4 @@ numpy
 fastapi
 uvicorn
 streamlit
-
+plotly
