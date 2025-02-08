@@ -15,7 +15,7 @@ with open("models/scaler.pkl", "rb") as f:
 # Streamlit UI Configuration
 st.set_page_config(page_title="Earthquake Prediction", page_icon="🌍", layout="wide")
 
-# Custom Styling
+# Custom Styling for Mobile Responsiveness
 st.markdown("""
     <style>
         .stButton>button {
@@ -31,6 +31,15 @@ st.markdown("""
             color: #ff914d;
             font-size: 30px;
             font-weight: bold;
+        }
+        /* Responsive Design for mobile devices */
+        @media (max-width: 768px) {
+            .stTitle {
+                font-size: 24px;
+            }
+            .stButton>button {
+                font-size: 16px;
+            }
         }
     </style>
 """, unsafe_allow_html=True)
@@ -68,6 +77,10 @@ if st.sidebar.button("🚀 Predict Magnitude"):
         fig.update_layout(yaxis=dict(range=[0, 10]), title="🌍 Earthquake Magnitude Prediction", showlegend=False)
         st.plotly_chart(fig, use_container_width=True)
 
+        # Display Alert if Magnitude > 5
+        if prediction > 5:
+            st.warning(f"⚠️ **Warning!** The predicted magnitude is high ({prediction:.2f}), indicating a potentially strong earthquake.")
+
     except Exception as e:
         st.error("⚠️ Error occurred: " + str(e))
 
@@ -86,5 +99,5 @@ if st.sidebar.button("Show Feature Importance"):
 # Footer
 st.markdown("""
     <hr>
-    <center>🌍 Developed BY YIhenew Animut ❤️ for Earthquake Prediction | Powered by Machine Learning</center>
+    <center>🌍 Developed BY @Yihenew Animut ❤️ for Earthquake Prediction | github : @Yihenew21</center>
 """, unsafe_allow_html=True)
