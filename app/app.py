@@ -1,8 +1,13 @@
+import os
 import streamlit as st
 import pickle
 import numpy as np
 import plotly.express as px
 import pandas as pd
+import pydeck as pdk
+
+# Set your Mapbox API token
+os.environ["MAPBOX_ACCESS_TOKEN"] = "<pk.eyJ1IjoiYmlydWsyMSIsImEiOiJjbTZ3bGY2ZnAwaG1jMnFzNjIxMjFnYXFpIn0.ztG_q89N0vo6AztZCuDKKA>"
 
 # Load trained model
 with open("models/random_forest.pkl", "rb") as f:
@@ -41,6 +46,10 @@ st.markdown("""
                 font-size: 16px;
             }
         }
+        /* Scrollable content */
+        .block-container {
+            overflow-y: auto;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -55,10 +64,50 @@ latitude = st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=9
 longitude = st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=0.0, step=0.01)
 nst = st.sidebar.slider("📡 Number of Stations (nst)", min_value=0, max_value=100, value=10, step=1)
 
-# Interactive Map for Selecting Latitude and Longitude
+# Back Button
+if st.sidebar.button("🔙 Go Back to Prediction"):
+    st.experimental_rerun()
+
+# Interactive Map with Mapbox
 st.sidebar.subheader("🌍 Select Location on Map")
-location_data = pd.DataFrame({"lat": [latitude], "lon": [longitude]})
-selected_location = st.sidebar.map(location_data)
+map_center = [latitude, longitude]
+map_zoom = 3  # Zoom level (adjust for better visualization)
+
+# Create the map with pydeck using Mapbox
+deck = pdk.Deck(
+    initial_view_state=pdk.ViewState(
+        latitude=map_center[0], 
+        longitude=map_center[1],
+        zoom=map_zoom,
+        pitch=0
+    ),
+    layers=[
+        pdk.Layer(
+            "ScatterplotLayer",
+            data=pd.DataFrame({"lat": [latitude], "lon": [longitude]}),
+            get_position=["lon", "lat"],
+            get_radius=100000,
+            get_fill_color=[255, 0, 0],
+            radius_min_pixels=5,
+        )
+    ],
+    map_style="mapbox://styles/mapbox/streets-v11",  # Mapbox style (use Mapbox access token)
+    tooltip={"text": "Latitude: {lat}\nLongitude: {lon}"}
+)
+
+st.pydeck_chart(deck)
+
+# Map click event to update latitude and longitude
+if st.button("Click Map to Set Location"):
+    selected_lat = st.session_state.get("lat", latitude)
+    selected_lon = st.session_state.get("lon", longitude)
+    
+    latitude = selected_lat
+    longitude = selected_lon
+
+    # Updating inputs to reflect clicked location
+    st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=90.0, value=latitude, step=0.01)
+    st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=longitude, step=0.01)
 
 # Process Input and Prediction
 if st.sidebar.button("🚀 Predict Magnitude"):
@@ -99,5 +148,5 @@ if st.sidebar.button("Show Feature Importance"):
 # Footer
 st.markdown("""
     <hr>
-    <center>🌍 Developed BY @Yihenew Animut ❤️ for Earthquake Prediction | github : @Yihenew21</center>
+    <center>🌍 Developed by YIHENEW ANIMUT ❤️ for Earthquake Prediction | github : @Yihenew21</center>
 """, unsafe_allow_html=True)
