@@ -41,10 +41,6 @@ st.markdown("""
                 font-size: 16px;
             }
         }
-        /* Scrollable content */
-        .block-container {
-            overflow-y: auto;
-        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -59,23 +55,10 @@ latitude = st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=9
 longitude = st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=0.0, step=0.01)
 nst = st.sidebar.slider("📡 Number of Stations (nst)", min_value=0, max_value=100, value=10, step=1)
 
-# Back Button
-if st.sidebar.button("🔙 Go Back to Prediction"):
-    st.experimental_rerun()
-
 # Interactive Map for Selecting Latitude and Longitude
 st.sidebar.subheader("🌍 Select Location on Map")
 location_data = pd.DataFrame({"lat": [latitude], "lon": [longitude]})
 selected_location = st.sidebar.map(location_data)
-
-# Update latitude and longitude from map click
-if selected_location is not None:
-    latitude = selected_location.lat[0] if len(selected_location.lat) > 0 else latitude
-    longitude = selected_location.lon[0] if len(selected_location.lon) > 0 else longitude
-
-    # Updating inputs to reflect clicked location
-    st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=90.0, value=latitude, step=0.01)
-    st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=longitude, step=0.01)
 
 # Process Input and Prediction
 if st.sidebar.button("🚀 Predict Magnitude"):
@@ -116,5 +99,5 @@ if st.sidebar.button("Show Feature Importance"):
 # Footer
 st.markdown("""
     <hr>
-    <center>🌍 Developed wby YIHENEW ANIMUT ❤️ for Earthquake Prediction | GITHUB : @Yihenew21</center>
+    <center>🌍 Developed BY YIHENEW ANIMUT ❤️ for Earthquake Prediction | Github : @Yihenew21</center>
 """, unsafe_allow_html=True)
