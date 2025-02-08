@@ -17,6 +17,12 @@ with open("models/random_forest.pkl", "rb") as f:
 with open("models/scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
 
+# Initialize session state for latitude and longitude if they don't exist
+if 'latitude' not in st.session_state:
+    st.session_state.latitude = 0.0
+if 'longitude' not in st.session_state:
+    st.session_state.longitude = 0.0
+
 # Streamlit UI Configuration
 st.set_page_config(page_title="Earthquake Prediction", page_icon="🌍", layout="wide")
 
@@ -60,8 +66,8 @@ st.write("Enter the earthquake parameters below to predict the magnitude.")
 # Sidebar for Inputs
 st.sidebar.header("🔧 Input Parameters")
 depth = st.sidebar.number_input("🌎 Depth (km)", min_value=0.0, max_value=700.0, value=10.0, step=0.1)
-latitude = st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=90.0, value=0.0, step=0.01)
-longitude = st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=0.0, step=0.01)
+latitude = st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=90.0, value=st.session_state.latitude, step=0.01)
+longitude = st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=st.session_state.longitude, step=0.01)
 nst = st.sidebar.slider("📡 Number of Stations (nst)", min_value=0, max_value=100, value=10, step=1)
 
 # Back Button
@@ -99,13 +105,16 @@ st.pydeck_chart(deck)
 
 # Map click event to update latitude and longitude
 if st.button("Click Map to Set Location"):
-    selected_lat = st.session_state.get("lat", latitude)
-    selected_lon = st.session_state.get("lon", longitude)
-    
-    latitude = selected_lat
-    longitude = selected_lon
+    # Simulating map click update
+    # This part will need the logic to get lat, lon from the map click event, or from user selection.
+    st.session_state.latitude = latitude  # Save updated latitude
+    st.session_state.longitude = longitude  # Save updated longitude
 
-    # Updating inputs to reflect clicked location
+    # Update the sidebar inputs to reflect the new location
+    latitude = st.session_state.latitude
+    longitude = st.session_state.longitude
+
+    # Update the input fields with the new location
     st.sidebar.number_input("📍 Latitude", min_value=-90.0, max_value=90.0, value=latitude, step=0.01)
     st.sidebar.number_input("📍 Longitude", min_value=-180.0, max_value=180.0, value=longitude, step=0.01)
 
@@ -148,5 +157,5 @@ if st.sidebar.button("Show Feature Importance"):
 # Footer
 st.markdown("""
     <hr>
-    <center>🌍 Developed by YIHENEW ANIMUT ❤️ for Earthquake Prediction | github : @Yihenew21</center>
+    <center>🌍 Developed by YIHENEW ANIMUT ❤️ for Earthquake Prediction | github Username : @Yihenew21</center>
 """, unsafe_allow_html=True)
